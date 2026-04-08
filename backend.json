@@ -1,0 +1,51 @@
+
+{
+  "entities": {
+    "EmergencyContact": {
+      "title": "EmergencyContact",
+      "type": "object",
+      "description": "Represents a contact saved by the user to receive emergency SMS messages.",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phoneNumber": { "type": "string" }
+      },
+      "required": ["id", "name", "phoneNumber"]
+    },
+    "TrackingProfile": {
+      "title": "TrackingProfile",
+      "description": "Stores child mode tracking configuration and real-time status for cross-device monitoring.",
+      "type": "object",
+      "properties": {
+        "username": { "type": "string" },
+        "password": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "lastLat": { "type": "number" },
+        "lastLng": { "type": "number" },
+        "lastUpdatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["username", "password"]
+    }
+  },
+  "auth": {
+    "providers": ["password", "anonymous"]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}/emergencyContacts/{emergencyContactId}",
+        "definition": {
+          "entityName": "EmergencyContact",
+          "description": "Private emergency contacts for a specific user."
+        }
+      },
+      {
+        "path": "/trackingProfiles/{username}",
+        "definition": {
+          "entityName": "TrackingProfile",
+          "description": "Publicly accessible tracking data secured by username/password for cross-device usage."
+        }
+      }
+    ]
+  }
+}

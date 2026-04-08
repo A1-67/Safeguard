@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 28% 15%;
+    --foreground: 210 40% 98%;
+    --card: 240 28% 12%;
+    --card-foreground: 210 40% 98%;
+    --popover: 240 28% 12%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 212 100% 72%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 272 100% 72%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 240 28% 25%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 272 100% 72%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 240 28% 25%;
+    --input: 240 28% 25%;
+    --ring: 212 100% 72%;
+    --radius: 1rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    overflow-x: hidden;
+  }
+}
+
+.emergency-button-glow {
+  box-shadow: 0 0 50px rgba(114, 181, 255, 0.4);
+}
+
+.emergency-button-active {
+  animation: pulse-red 1s infinite alternate;
+}
+
+@keyframes pulse-red {
+  from {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+    transform: scale(1);
+  }
+  to {
+    box-shadow: 0 0 60px rgba(255, 0, 0, 0.8);
+    transform: scale(1.05);
+  }
+}

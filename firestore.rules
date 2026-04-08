@@ -1,0 +1,27 @@
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    match /users/{userId} {
+      allow read, write: if request.auth.uid == userId;
+      match /emergencyContacts/{contactId} {
+        allow read, write: if request.auth.uid == userId;
+      }
+    }
+
+    // Tracking profiles are accessed by username (ID) and verified in-app by password field.
+    // For MVP/Prototyping, we allow public read/write to these specific documents 
+    // to support the "any device with username/password" requirement.
+    match /trackingProfiles/{username} {
+      allow read, write: if true;
+    }
+
+    match /{path=**} {
+      allow read, write: if false;
+    }
+  }
+}
